@@ -1,0 +1,58 @@
+# This workflow is responsible for deploying the static content of the Cloud Resume
+# to AWS S3 and then invalidating the CloudFront cache to ensure visitors see the latest version.
+
+name: Deploy Frontend to S3 and Invalidate CloudFront
+
+# Controls when the workflow is triggered: on pushes to the 'main' branch
+on:
+  push:
+    branches:
+      - main
+
+# Define the environment variables for AWS credentials
+env:
+  # IMPORTANT: REPLACE THESE PLACEHOLDERS WITH YOUR ACTUAL AWS IDs
+  S3_BUCKET_NAME: "fezancloudresume"
+  CLOUDFRONT_DISTRIBUTION_ID: "E27I2LIA086GC4"
+  AWS_REGION: "eu-west-2" # Match your S3 bucket's region
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    # Define the environment variables for the AWS credentials, using the GitHub Secrets
+    environment: production
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      # ----------------------------------------------------
+      # 1. Configure AWS Credentials
+      # ----------------------------------------------------
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          # Uses the secrets created in the GitHub repository settings
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      # ----------------------------------------------------
+      # 2. Deploy Static Files to S3
+      # ----------------------------------------------------
+      # The 'sync' command uploads new files, updates changed files, and deletes old files
+      # from the S3 bucket, making the deployment idempotent.
+      - name: Sync Files to S3 Bucket
+        run: aws s3 sync . s3://${{ env.S3_BUCKET_NAME }} --delete
+
+      # ----------------------------------------------------
+      # 3. Invalidate CloudFront Cache
+      # ----------------------------------------------------
+      # This step is critical to ensure the deployed changes are visible immediately
+      # instead of waiting for the cache TTL to expire.
+      - name: Create CloudFront Cache Invalidation
+        run: |
+          aws cloudfront create-invalidation \
+            --distribution-id ${{ env.CLOUDFRONT_DISTRIBUTION_ID }} \
+            --paths "/*"

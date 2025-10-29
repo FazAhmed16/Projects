@@ -207,99 +207,98 @@
 					</section>
 
 				<!-- Three / Contact -->
-<section id="three" class="wrapper style1 fade-up">
-  <div class="inner">
-    <h2>Contact</h2>
-    <p>If you’d like to get in touch about roles, collaborations, or projects, please use the form below or the links provided.</p>
+				<section id="three" class="wrapper style1 fade-up">
+					<div class="inner">
+						<h2>Contact</h2>
+						<p>If you’d like to get in touch about roles, collaborations, or projects, please use the form below or the links provided.</p>
 
-    <div class="split style1">
-      <!-- Contact Form -->
-      <section>
-        <form id="contactForm">
-          <div class="fields">
-            <div class="field half">
-              <label for="name">Name</label>
-              <input type="text" name="name" id="name" required />
-            </div>
-            <div class="field half">
-              <label for="email">Email</label>
-              <input type="email" name="email" id="email" required />
-            </div>
-            <div class="field">
-              <label for="message">Message</label>
-              <textarea name="message" id="message" rows="5" required></textarea>
-            </div>
-          </div>
-          <ul class="actions">
-            <li><button type="submit" class="button submit">Send Message</button></li>
-          </ul>
-        </form>
+						<div class="split style1">
+							<!-- Contact Form -->
+								<section>
+									<form id="contactForm">
+										<div class="fields">
+											<div class="field half">
+												<label for="name">Name</label>
+												<input type="text" name="name" id="name" required />
+										</div>
+										<div class="field half">
+												<label for="email">Email</label>
+												<input type="email" name="email" id="email" required />
+										</div>
+										<div class="field">
+												<label for="message">Message</label>
+												<textarea name="message" id="message" rows="5" required></textarea>
+										</div>
+									</div>
+									<ul class="actions">
+										<li><button type="submit" class="button submit">Send Message</button></li>
+									</ul>
+								</form>
 
-        <!-- Form status message -->
-        <p id="formStatus" style="margin-top:10px;font-size:14px;color:#6b7280;"></p>
-      </section>
+					<!-- Form status message -->
+					<p id="formStatus" style="margin-top:10px;font-size:14px;color:#6b7280;"></p>
+				</section>
 
-      <!-- Contact Links -->
-      <section>
-        <ul class="contact">
-          <li>
-            <h3>Email</h3>
-            <a href="mailto:fezan16@hotmail.com">fezan16@hotmail.com</a>
-          </li>
-          <li>
-            <h3>LinkedIn</h3>
-            <a href="https://www.linkedin.com/in/fezanahmed" target="_blank">www.linkedin.com/in/fezanahmed</a>
-          </li>
-          <li>
-            <h3>GitHub</h3>
-            <a href="https://github.com/FazAhmed16/Projects" target="_blank">github.com/FazAhmed16/Projects</a>
-          </li>
-        </ul>
-      </section>
-    </div>
-  </div>
-</section>
+					<!-- Contact Links -->
+					<section>
+						<ul class="contact">
+							<li>
+								<h3>Email</h3>
+								<a href="mailto:fezan16@hotmail.com">fezan16@hotmail.com</a>
+							</li>
+							<li>
+								<h3>LinkedIn</h3>
+								<a href="https://www.linkedin.com/in/fezanahmed" target="_blank">www.linkedin.com/in/fezanahmed</a>
+							</li>
+							<li>
+								<h3>GitHub</h3>
+								<a href="https://github.com/FazAhmed16/Projects" target="_blank">github.com/FazAhmed16/Projects</a>
+							</li>
+						</ul>
+					</section>
+				</div>
+			</div>
+		</section>
 
 <!-- Contact Form Script -->
 <script>
-  const form = document.getElementById('contactForm');
-  const formStatus = document.getElementById('formStatus');
+	const form = document.getElementById('contactForm');
+	const formStatus = document.getElementById('formStatus');
 
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    formStatus.style.color = '#6b7280';
-    formStatus.textContent = 'Sending...';
+	form.addEventListener('submit', async (e) => {
+		e.preventDefault();
+		formStatus.style.color = '#6b7280';
+		formStatus.textContent = 'Sending...';
 
-    const data = {
-      name: form.name.value,
-      email: form.email.value,
-      message: form.message.value
-    };
+		const data = {
+			name: form.name.value,
+			email: form.email.value,
+			message: form.message.value
+		};
 
-    try {
-      const response = await fetch('https://uighcb54cg.execute-api.eu-west-2.amazonaws.com/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
-      });
+		try {
+			const response = await fetch('YOUR_API_GATEWAY_URL_HERE/contact', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify(data)
+			});
 
-      const result = await response.json();
+			const result = await response.json();
 
-      if (response.ok) {
-        formStatus.style.color = '#10b981'; // green
-        formStatus.textContent = '✅ Message sent successfully!';
-        form.reset();
-      } else {
-        formStatus.style.color = '#ef4444'; // red
-        formStatus.textContent = '❌ Failed to send message: ' + (result.error || 'Unknown error');
-      }
-
-    } catch (error) {
-      formStatus.style.color = '#ef4444';
-      formStatus.textContent = '❌ Network error. Please try again later.';
-      console.error(error);
-    }
-  });
+			if (response.ok) {
+				formStatus.style.color = '#10b981'; // green
+				formStatus.textContent = '✅ Message sent successfully!';
+				form.reset();
+			} else {
+				formStatus.style.color = '#ef4444'; // red
+				formStatus.textContent = '❌ Failed to send message: ' + (result.error || 'Unknown error');
+			}
+		} catch (error) {
+			formStatus.style.color = '#ef4444';
+			formStatus.textContent = '❌ Network error. Please try again later.';
+			console.error(error);
+		}
+	});
 </script>
 
 
@@ -424,6 +423,7 @@
 
 	</body>
 </html>
+
 
 
 

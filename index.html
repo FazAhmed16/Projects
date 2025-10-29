@@ -36,7 +36,11 @@
 					<section id="intro" class="wrapper style1 fullscreen fade-up">
 						<div class="inner">
 							<h1>Hello, I'm Fezan.</h1>
-							<p><strong>I'm a Cloud/DevOps Engineer based in the UK.</strong> I am passionate about cloud architecture, automation, and technology-driven problem solving. I love building scalable cloud solutions and simplifying complex systems through automation.</p>
+							<p>
+								<strong><span id="typed"></span></strong><br>
+								I am passionate about cloud architecture, automation, and technology-driven problem solving. 
+								I love building scalable cloud solutions and simplifying complex systems through automation.
+							</p>
 							<ul class="actions">
 								<li><a href="#projects" class="button scrolly">See Projects</a></li>
 								<li><a href="Fezan Ahmed IT CV.pdf" class="button" target="_blank">Download CV</a></li>
@@ -346,8 +350,32 @@
                 // Call the function when the page loads
                 document.addEventListener('DOMContentLoaded', updateVisitorCount);
             </script>
+			
+		<!-- Typewriter effect library -->
+		<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+
+		<!-- Typewriter configuration -->
+			<script>
+ 			 	document.addEventListener('DOMContentLoaded', function() {
+    				var typed = new Typed('#typed', {
+      					strings: [
+        					"I'm a Cloud Engineer",
+        					"I'm a DevOps Engineer",
+        					"I'm an aspiring Solutions Architect"
+      					],
+      					typeSpeed: 70,      // typing speed
+      					backSpeed: 40,      // backspacing speed
+      					backDelay: 1500,    // delay before backspacing
+      					loop: true,         // keep cycling through the text
+     					showCursor: true,   // show blinking cursor
+      					cursorChar: '|'
+    				});
+  				});
+			</script>
+
 	</body>
 </html>
+
 
 
 

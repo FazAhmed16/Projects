@@ -5,7 +5,7 @@
 ![DynamoDB](https://img.shields.io/badge/DynamoDB-4053D6?style=for-the-badge&logo=amazon-dynamodb&logoColor=white)
 ![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-2088FF?style=for-the-badge&logo=github-actions&logoColor=white)
 
-**Live Demo:** www.fezanahmed.co.uk
+**Live Demo:** https://fezanahmed.co.uk
 
 ---
 

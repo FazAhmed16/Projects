@@ -13,7 +13,7 @@
 This project is a serverless, full-stack web application built on AWS to host my professional resume. It demonstrates cloud engineering skills including **Serverless architecture**, **CI/CD pipelines**, and **NoSQL databases**.
 
 ## 🏗️ Architecture
-![Architecture Diagram](architecture-diagram.png)
+![Architecture Diagram](cloud-resume-challenge-architecture-diagram.png)
 
 The application follows a decoupled serverless architecture:
 
